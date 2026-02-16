@@ -3,234 +3,1783 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mow and More NJ | Professional Property Maintenance</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mow and More NJ | Premier Property Maintenance Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .hero-bg { 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558905619-17153c246a22?auto=format&fit=crop&q=80&w=2000'); 
-            background-size: cover; 
-            background-position: center; 
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --forest: #1a3a1a;
+            --sage: #4a6741;
+            --mint: #7fa877;
+            --cream: #f8f7f3;
+            --sand: #e8e5dc;
+            --charcoal: #2d2d2d;
+            --white: #ffffff;
+            --black: #000000;
+        }
+        
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--sage);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--forest);
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* ===== LAYOUT UTILITIES ===== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .section {
+            padding: 96px 0;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+        
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .gap-1 { gap: 8px; }
+        .gap-2 { gap: 12px; }
+        .gap-3 { gap: 16px; }
+        .gap-4 { gap: 24px; }
+        .gap-6 { gap: 32px; }
+        .gap-8 { gap: 48px; }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(248, 247, 243, 0.95);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--forest);
+        }
+        
+        .logo-title span {
+            color: var(--sage);
+        }
+        
+        .logo-subtitle {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            color: var(--sage);
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--charcoal);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--sage);
+        }
+        
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--sage);
+            font-weight: 600;
+        }
+        
+        .mobile-phone {
+            display: none;
+        }
+        
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: var(--white);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 103, 65, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 160px;
+            padding-bottom: 80px;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1558905819-17153c246a22?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 128px;
+            background: linear-gradient(to top, var(--cream), transparent);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+        
+        .hero-title {
+            font-size: 56px;
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        
+        .hero-title span {
+            display: block;
+            font-weight: 600;
+            color: var(--mint);
+            margin-top: 8px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .decorative-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mint), var(--sage));
+            margin-bottom: 32px;
+        }
+        
+        /* ===== TRUST INDICATORS ===== */
+        .trust-section {
+            position: relative;
+            margin-top: -64px;
+            z-index: 20;
+        }
+        
+        .trust-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--sand);
+        }
+        
+        .trust-card-inner {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .trust-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .trust-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+        
+        .trust-card p {
+            font-size: 14px;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            padding: 96px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 56px;
+            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--forest);
+            margin-bottom: 8px;
+            animation: countUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: var(--sage);
+        }
+        
+        /* ===== SERVICES SECTION ===== */
+        .services-section {
+            padding: 96px 0;
+            background-color: var(--sand);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--forest);
+            margin-bottom: 16px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--sage);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--white);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 16px;
+        }
+        
+        .service-card p {
+            font-size: 16px;
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .service-features {
+            list-style: none;
+        }
+        
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .service-features i {
+            color: var(--mint);
+            font-size: 18px;
+        }
+        
+        /* ===== PORTFOLIO SECTION ===== */
+        .portfolio-section {
+            padding: 96px 0;
+        }
+        
+        .portfolio-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .before-after-container {
+            position: relative;
+            overflow: hidden;
+            cursor: col-resize;
+            user-select: none;
+            height: 400px;
+        }
+        
+        .before-after-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .after-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: inset(0 0 0 50%);
+            transition: clip-path 0.3s ease;
+        }
+        
+        .slider-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: var(--white);
+            transform: translateX(-50%);
+            z-index: 10;
+            transition: left 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 11;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .slider-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .slider-button::before,
+        .slider-button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .slider-button::before {
+            left: 14px;
+            border-width: 8px 8px 8px 0;
+            border-color: transparent var(--forest) transparent transparent;
+        }
+        
+        .slider-button::after {
+            right: 14px;
+            border-width: 8px 0 8px 8px;
+            border-color: transparent transparent transparent var(--forest);
+        }
+        
+        .image-label {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 8px 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+            z-index: 5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: var(--forest);
+        }
+        
+        .before-label {
+            left: 20px;
+        }
+        
+        .after-label {
+            right: 20px;
+        }
+        
+        .portfolio-caption {
+            background: var(--white);
+            padding: 24px;
+        }
+        
+        .portfolio-caption h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+        
+        .portfolio-caption p {
+            font-size: 14px;
+            color: var(--sage);
+        }
+        
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            padding: 96px 0;
+            background-color: var(--sand);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .contact-info-inner {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .contact-info a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--forest);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: var(--sage);
+        }
+        
+        .contact-info i {
+            color: var(--sage);
+        }
+        
+        .contact-divider {
+            color: var(--sage);
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 56px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 2px solid var(--sand);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: var(--sage);
+        }
+        
+        .form-textarea {
+            resize: none;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 20px;
+            font-size: 16px;
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 32px;
+            padding: 32px;
+            background: var(--white);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .success-message i {
+            font-size: 48px;
+            color: var(--mint);
+            margin-bottom: 16px;
+        }
+        
+        .success-message h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+        
+        .success-message p {
+            font-size: 18px;
+            color: var(--sage);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 64px 0;
+            background-color: var(--forest);
+            color: var(--white);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-links i {
+            color: var(--mint);
+        }
+        
+        .footer-services {
+            list-style: none;
+        }
+        
+        .footer-services li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-services li:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-copyright {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-legal a {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-legal a:hover {
+            color: var(--white);
+        }
+        
+        /* ===== MODALS ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow-y: auto;
+        }
+        
+        .modal.show {
+            display: block;
+        }
+        
+        .modal-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 32px 16px;
+        }
+        
+        .modal-content {
+            position: relative;
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 1000px;
+            width: 100%;
+            padding: 56px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background-color: var(--sand);
+        }
+        
+        .modal-close i {
+            color: var(--charcoal);
+            font-size: 20px;
+        }
+        
+        .modal-title {
+            font-size: 40px;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--forest);
+            margin-bottom: 24px;
+        }
+        
+        .modal-body {
+            color: var(--charcoal);
+        }
+        
+        .modal-body section {
+            margin-bottom: 32px;
+        }
+        
+        .modal-body h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 12px;
+        }
+        
+        .modal-body p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .modal-body ul {
+            list-style: disc;
+            padding-left: 24px;
+            margin-top: 12px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .modal-body a {
+            color: var(--sage);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .modal-body a:hover {
+            text-decoration: underline;
+        }
+        
+        .modal-updated {
+            font-size: 14px;
+            color: var(--sage);
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-phone {
+                display: block;
+            }
+            
+            .mobile-phone a {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--sage), var(--mint));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--white);
+            }
+            
+            .hero-title {
+                font-size: 40px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .grid-cols-2,
+            .grid-cols-3,
+            .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 40px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .contact-form {
+                padding: 32px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .modal-content {
+                padding: 32px;
+            }
+            
+            .modal-title {
+                font-size: 32px;
+            }
+            
+            .contact-info-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .contact-divider {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .btn {
+                padding: 14px 28px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <!-- Header / Navigation -->
-    <nav class="fixed w-full z-50 bg-white border-b border-gray-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center space-x-2">
-                    <div class="bg-green-600 p-2 rounded-lg">
-                        <i class="fas fa-seedling text-white text-xl"></i>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-xl font-800 tracking-tighter leading-none text-gray-900 tracking-tight">MOW & MORE <span class="text-green-600 font-black">NJ</span></span>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">Professional Maintenance</span>
-                    </div>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
                 </div>
-                
-                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold uppercase tracking-wider">
-                    <a href="#services" class="hover:text-green-600 transition-colors">Services</a>
-                    <a href="tel:7329648794" class="text-green-700 flex items-center gap-2">
-                        <i class="fas fa-phone-alt"></i> (732) 964-8794
-                    </a>
-                    <a href="#contact" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-all shadow-md">Request Quote</a>
+                <div class="logo-text">
+                    <div class="logo-title">MOW & MORE <span>NJ</span></div>
+                    <div class="logo-subtitle">Premier Maintenance</div>
                 </div>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:7329648794" class="nav-phone">
+                    <i class="fas fa-phone-alt"></i> (732) 964-8794
+                </a></li>
+                <li><a href="#contact" class="btn btn-primary">Request Quote</a></li>
+            </ul>
 
-                <!-- Mobile Phone Icon only -->
-                <div class="md:hidden flex items-center">
-                    <a href="tel:7329648794" class="bg-green-600 text-white p-3 rounded-full">
-                        <i class="fas fa-phone-alt"></i>
-                    </a>
-                </div>
+            <!-- Mobile Phone -->
+            <div class="mobile-phone">
+                <a href="tel:7329648794">
+                    <i class="fas fa-phone-alt"></i>
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-[85vh] flex items-center overflow-hidden hero-bg">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="max-w-2xl">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-                    Commercial Reliability. <br>
-                    <span class="text-green-500 text-3xl md:text-5xl">Elite Residential Standards.</span>
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="decorative-line animate-fade-in delay-100"></div>
+                <h1 class="hero-title serif animate-fade-in-up delay-200">
+                    Elevating New Jersey's
+                    <span>Premier Properties</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">
-                    Mow and More NJ provides scalable landscape and property maintenance solutions for commercial portfolios and premium residential estates.
+                <p class="hero-subtitle animate-fade-in-up delay-300">
+                    Professional landscape maintenance and property care solutions designed for commercial excellence and residential distinction.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" class="px-8 py-4 bg-green-600 text-white rounded-xl font-bold text-lg hover:bg-green-700 transition-all text-center shadow-lg">Get a Proposal</a>
-                    <a href="tel:7329648794" class="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all text-center">
-                        Call (732) 964-8794
-                    </a>
+                <div class="hero-buttons animate-fade-in-up delay-400">
+                    <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+                    <a href="tel:7329648794" class="btn btn-secondary">(732) 964-8794</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Value Props -->
-    <div class="max-w-7xl mx-auto px-4 -mt-12 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex items-start space-x-4">
-                <div class="text-green-600 text-2xl mt-1"><i class="fas fa-file-contract"></i></div>
-                <div>
-                    <h3 class="font-bold text-gray-900">Commercial Ready</h3>
-                    <p class="text-sm text-gray-500">Fully insured with commercial liability and workers comp.</p>
+    <!-- Trust Indicators -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="grid grid-cols-3">
+                <div class="trust-card animate-fade-in-up delay-100">
+                    <div class="trust-card-inner">
+                        <div class="trust-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Fully Insured</h3>
+                            <p>Commercial liability and workers compensation coverage for complete peace of mind.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex items-start space-x-4">
-                <div class="text-green-600 text-2xl mt-1"><i class="fas fa-shipping-fast"></i></div>
-                <div>
-                    <h3 class="font-bold text-gray-900">Rapid Response</h3>
-                    <p class="text-sm text-gray-500">Systematic operations ensuring property managers get fast service.</p>
+                
+                <div class="trust-card animate-fade-in-up delay-200">
+                    <div class="trust-card-inner">
+                        <div class="trust-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Rapid Response</h3>
+                            <p>Systematic operations ensuring timely service delivery across all properties.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 flex items-start space-x-4">
-                <div class="text-green-600 text-2xl mt-1"><i class="fas fa-map-marker-alt"></i></div>
-                <div>
-                    <h3 class="font-bold text-gray-900">Locally Operated</h3>
-                    <p class="text-sm text-gray-500">Serving Central & North Jersey with dedicated local crews.</p>
+                
+                <div class="trust-card animate-fade-in-up delay-300">
+                    <div class="trust-card-inner">
+                        <div class="trust-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Local Excellence</h3>
+                            <p>Dedicated crews serving Central & Northern New Jersey with precision care.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="grid grid-cols-4">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number delay-100">200+</div>
+                    <div class="stat-label">Properties Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number delay-200">100%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number delay-300">24hr</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-16">
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Our Capabilities</h2>
-                <div class="h-1 w-20 bg-green-600 mb-4"></div>
-                <p class="text-gray-500">Integrated maintenance for New Jersey's premier properties.</p>
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="decorative-line" style="margin: 0 auto 24px;"></div>
+                <h2 class="section-title">Professional Services</h2>
+                <p class="section-subtitle">Comprehensive maintenance solutions tailored to your property's unique requirements</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-3">
                 <!-- Service 1 -->
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-green-50 text-green-600 flex items-center justify-center rounded-2xl text-2xl">
+                <div class="service-card">
+                    <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Property Management</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Dedicated maintenance for HOAs, multi-unit complexes, and rental portfolios. We handle the heavy lifting so you can focus on management.</p>
-                    <ul class="text-xs font-bold text-gray-400 space-y-2 uppercase tracking-tighter">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Seasonal Cleanups</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Weekly Turf Management</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Site Reporting</li>
+                    <h3>Property Management</h3>
+                    <p>Turnkey maintenance for HOAs, multi-unit complexes, and rental portfolios. Professional care that enhances property value.</p>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Seasonal Property Cleanups</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Weekly Turf Management</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Detailed Site Reporting</span>
+                        </li>
                     </ul>
                 </div>
+
                 <!-- Service 2 -->
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-green-50 text-green-600 flex items-center justify-center rounded-2xl text-2xl">
+                <div class="service-card">
+                    <div class="service-icon">
                         <i class="fas fa-industry"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Commercial Contracts</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Full-scale maintenance for retail centers and office parks. Focused on safety, accessibility, and high-impact curb appeal.</p>
-                    <ul class="text-xs font-bold text-gray-400 space-y-2 uppercase tracking-tighter">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Parking Lot Integrity</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Perimeter Maintenance</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Snow & Ice Management</li>
+                    <h3>Commercial Contracts</h3>
+                    <p>Enterprise-grade maintenance for retail centers and office parks. Safety-focused with exceptional curb appeal.</p>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Parking Lot Maintenance</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Perimeter Care</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Snow & Ice Management</span>
+                        </li>
                     </ul>
                 </div>
+
                 <!-- Service 3 -->
-                <div class="space-y-4">
-                    <div class="w-16 h-16 bg-green-50 text-green-600 flex items-center justify-center rounded-2xl text-2xl">
+                <div class="service-card">
+                    <div class="service-icon">
                         <i class="fas fa-home"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Residential Elite</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">High-end residential lawn care and landscape design. The precision that built our reputation, delivered weekly.</p>
-                    <ul class="text-xs font-bold text-gray-400 space-y-2 uppercase tracking-tighter">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Precision Mowing</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Mulching & Edging</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Landscape Enhancements</li>
+                    <h3>Residential Elite</h3>
+                    <p>Premium residential services for discerning homeowners. Meticulous attention to detail on every property.</p>
+                    <ul class="service-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Precision Lawn Care</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Landscape Design</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Property Enhancements</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Simple Contact Form -->
-    <section id="contact" class="py-24 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Start Your Proposal</h2>
-                <p class="text-gray-600">Call <span class="font-bold text-green-700">(732) 964-8794</span> or email <span class="font-bold text-green-700">steven@mowandmore.co</span></p>
+    <!-- Portfolio / Before & After Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="decorative-line" style="margin: 0 auto 24px;"></div>
+                <h2 class="section-title">Our Work Speaks</h2>
+                <p class="section-subtitle">Transforming properties across New Jersey with precision and care</p>
             </div>
 
-            <form id="mainForm" class="bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-xl space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Name</label>
-                        <input type="text" required class="w-full px-4 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-600 outline-none transition-all" placeholder="Enter your name">
+            <!-- Before/After Grid -->
+            <div class="grid grid-cols-2">
+                <!-- Before/After 1 -->
+                <div class="portfolio-item">
+                    <div class="before-after-container" data-slider="1">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
+                        <div class="after-image">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
+                        </div>
+                        <div class="slider-line"></div>
+                        <div class="slider-button"></div>
+                        <div class="image-label before-label">BEFORE</div>
+                        <div class="image-label after-label">AFTER</div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Email</label>
-                        <input type="email" required class="w-full px-4 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-600 outline-none transition-all" placeholder="yourname@company.com">
+                    <div class="portfolio-caption">
+                        <h3>Residential Estate Revitalization</h3>
+                        <p>Complete lawn restoration with precision edging and mulch installation</p>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Property Type</label>
-                    <select class="w-full px-4 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-600 outline-none bg-white">
-                        <option>Commercial / Retail</option>
-                        <option>Property Management / HOA</option>
-                        <option>Residential Estate</option>
-                        <option>Other</option>
-                    </select>
+
+                <!-- Before/After 2 -->
+                <div class="portfolio-item">
+                    <div class="before-after-container" data-slider="2">
+                        <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
+                        <div class="after-image">
+                            <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
+                        </div>
+                        <div class="slider-line"></div>
+                        <div class="slider-button"></div>
+                        <div class="image-label before-label">BEFORE</div>
+                        <div class="image-label after-label">AFTER</div>
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Commercial Property Upgrade</h3>
+                        <p>Full-service maintenance including landscape beds and seasonal plantings</p>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Project Details</label>
-                    <textarea rows="4" class="w-full px-4 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-600 outline-none transition-all" placeholder="Tell us about your property and maintenance needs..."></textarea>
+
+                <!-- Before/After 3 -->
+                <div class="portfolio-item">
+                    <div class="before-after-container" data-slider="3">
+                        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
+                        <div class="after-image">
+                            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
+                        </div>
+                        <div class="slider-line"></div>
+                        <div class="slider-button"></div>
+                        <div class="image-label before-label">BEFORE</div>
+                        <div class="image-label after-label">AFTER</div>
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Multi-Unit Complex</h3>
+                        <p>Systematic turf management and landscape refresh for property managers</p>
+                    </div>
                 </div>
-                <button type="submit" class="w-full py-5 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-all shadow-lg text-lg">Send Request</button>
+
+                <!-- Before/After 4 -->
+                <div class="portfolio-item">
+                    <div class="before-after-container" data-slider="4">
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
+                        <div class="after-image">
+                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
+                        </div>
+                        <div class="slider-line"></div>
+                        <div class="slider-button"></div>
+                        <div class="image-label before-label">BEFORE</div>
+                        <div class="image-label after-label">AFTER</div>
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Seasonal Transformation</h3>
+                        <p>Spring cleanup with mulching, pruning, and landscape bed restoration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="decorative-line" style="margin: 0 auto 24px;"></div>
+                <h2 class="section-title">Request a Consultation</h2>
+                <p class="section-subtitle" style="margin-bottom: 32px;">Let's discuss how we can elevate your property</p>
+                <div class="contact-info">
+                    <div class="contact-info-inner">
+                        <a href="tel:7329648794">
+                            <i class="fas fa-phone-alt"></i>
+                            (732) 964-8794
+                        </a>
+                        <span class="contact-divider">|</span>
+                        <a href="mailto:steven@mowandmore.co">
+                            <i class="fas fa-envelope"></i>
+                            steven@mowandmore.co
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" required class="form-input" placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" required class="form-input" placeholder="john@company.com">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Property Type</label>
+                        <select class="form-select">
+                            <option>Commercial / Retail</option>
+                            <option>Property Management / HOA</option>
+                            <option>Residential Estate</option>
+                            <option>Multi-Unit Complex</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Details</label>
+                    <textarea rows="5" class="form-textarea" placeholder="Tell us about your property and maintenance requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-submit">Submit Request</button>
             </form>
             
-            <div id="successMsg" class="hidden mt-8 p-6 bg-green-100 text-green-800 rounded-2xl text-center font-bold">
-                Thank you! Our operations team will contact you within 24 hours.
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>Thank You!</h3>
+                <p>We'll contact you within 24 hours to discuss your project.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4 justify-center md:justify-start">
-                        <div class="bg-green-600 p-2 rounded-lg">
-                            <i class="fas fa-seedling text-white"></i>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 24px;">
+                        <div class="logo-icon">
+                            <i class="fas fa-seedling"></i>
                         </div>
-                        <span class="text-2xl font-800 tracking-tighter uppercase">MOW & MORE <span class="text-green-600 font-black">NJ</span></span>
+                        <div class="logo-text">
+                            <div class="logo-title" style="color: var(--white);">MOW & MORE <span style="color: var(--mint);">NJ</span></div>
+                            <div class="logo-subtitle" style="color: var(--mint);">Premier Maintenance</div>
+                        </div>
                     </div>
-                    <p class="text-gray-400 text-sm">Professional property maintenance and landscaping solutions across New Jersey.</p>
+                    <p>Professional landscape maintenance and property care solutions for New Jersey's finest properties.</p>
                 </div>
-                <div class="space-y-4">
-                    <p class="text-lg font-bold">Contact Operations</p>
-                    <div class="flex flex-col space-y-2 text-gray-400 text-sm">
-                        <a href="tel:7329648794" class="hover:text-green-500 transition-colors">
-                            <i class="fas fa-phone-alt mr-2 text-green-500"></i> (732) 964-8794
-                        </a>
-                        <a href="mailto:steven@mowandmore.co" class="hover:text-green-500 transition-colors uppercase tracking-widest text-xs">
-                            <i class="fas fa-envelope mr-2 text-green-500"></i> steven@mowandmore.co
-                        </a>
-                    </div>
+
+                <!-- Contact -->
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="tel:7329648794">
+                                <i class="fas fa-phone-alt"></i>
+                                (732) 964-8794
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:steven@mowandmore.co">
+                                <i class="fas fa-envelope"></i>
+                                steven@mowandmore.co
+                            </a>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 12px; color: rgba(255, 255, 255, 0.8);">
+                            <i class="fas fa-map-marker-alt" style="color: var(--mint); margin-top: 4px;"></i>
+                            <span>Serving Central & Northern<br>New Jersey</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex justify-center md:justify-end space-x-4 text-gray-500 text-xs tracking-widest">
-                    <span>FOLLOW OUR WORK ON SOCIAL</span>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-services">
+                        <li>Property Management</li>
+                        <li>Commercial Maintenance</li>
+                        <li>Residential Services</li>
+                        <li>Snow Removal</li>
+                        <li>Landscape Design</li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-16 pt-8 border-t border-gray-800 text-center text-[10px] text-gray-500 uppercase tracking-[0.3em]">
-                © 2024 Mow and More NJ. All Rights Reserved.
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">© 2024 Mow and More NJ. All Rights Reserved.</div>
+                <div class="footer-legal">
+                    <a onclick="openModal('privacyModal')">Privacy Policy</a>
+                    <a onclick="openModal('termsModal')">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-wrapper">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('privacyModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <h2 class="modal-title">Privacy Policy</h2>
+                <div class="decorative-line" style="margin-bottom: 32px;"></div>
+                
+                <div class="modal-body">
+                    <p class="modal-updated"><strong>Last Updated:</strong> February 2024</p>
+                    
+                    <section>
+                        <h3>Information We Collect</h3>
+                        <p>When you request a quote or consultation through our website, we collect personal information including your name, email address, phone number, property address, and details about your maintenance needs. This information is used solely to provide you with accurate quotes and service delivery.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>How We Use Your Information</h3>
+                        <p>We use the information you provide to:</p>
+                        <ul>
+                            <li>Respond to your service inquiries and provide quotes</li>
+                            <li>Schedule and deliver landscape maintenance services</li>
+                            <li>Communicate with you about your property and service appointments</li>
+                            <li>Send important updates about our services (you may opt out at any time)</li>
+                            <li>Improve our services and customer experience</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>Information Sharing</h3>
+                        <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only with trusted service providers who assist us in operating our business (such as scheduling software or payment processors), and only to the extent necessary to provide our services.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Data Security</h3>
+                        <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Your Rights</h3>
+                        <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights or if you have questions about our privacy practices, please contact us at <a href="mailto:steven@mowandmore.co">steven@mowandmore.co</a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Cookies</h3>
+                        <p>Our website may use cookies to enhance your browsing experience. You can choose to disable cookies through your browser settings, though this may affect website functionality.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Changes to This Policy</h3>
+                        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page with an updated "Last Updated" date.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-wrapper">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('termsModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <h2 class="modal-title">Terms of Service</h2>
+                <div class="decorative-line" style="margin-bottom: 32px;"></div>
+                
+                <div class="modal-body">
+                    <p class="modal-updated"><strong>Last Updated:</strong> February 2024</p>
+                    
+                    <section>
+                        <h3>Agreement to Terms</h3>
+                        <p>By accessing and using the Mow and More NJ website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Services Description</h3>
+                        <p>Mow and More NJ provides professional landscape maintenance and property care services including but not limited to lawn mowing, property management, commercial maintenance, snow removal, and landscape design. Specific services and terms are agreed upon individually with each client.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Service Agreements</h3>
+                        <p>All service agreements are subject to the following:</p>
+                        <ul>
+                            <li>Quotes are valid for 30 days from the date of issue</li>
+                            <li>Services are scheduled based on weather conditions and crew availability</li>
+                            <li>Property owners must ensure safe access to all service areas</li>
+                            <li>Payment terms are specified in individual service agreements</li>
+                            <li>Cancellations must be made at least 24 hours in advance</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>Liability and Insurance</h3>
+                        <p>Mow and More NJ maintains comprehensive commercial general liability insurance and workers' compensation coverage. We are not responsible for pre-existing property damage, underground utilities not properly marked, or damage caused by severe weather events beyond our control.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Payment Terms</h3>
+                        <p>Payment is due upon completion of services unless otherwise specified in writing. We accept various payment methods including check, credit card, and electronic transfer. Late payments may incur additional fees as specified in individual service agreements.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Cancellation Policy</h3>
+                        <p>Either party may terminate ongoing service agreements with 30 days written notice. Early termination fees may apply for seasonal contracts. One-time services must be cancelled at least 24 hours before the scheduled service date to avoid cancellation fees.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Weather-Related Services</h3>
+                        <p>Snow removal and other weather-dependent services are performed based on specific weather conditions as outlined in individual contracts. We reserve the right to reschedule services due to unsafe weather conditions.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Intellectual Property</h3>
+                        <p>All content on this website, including text, graphics, logos, and images, is the property of Mow and More NJ and protected by copyright laws. Unauthorized use is prohibited.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Limitation of Liability</h3>
+                        <p>To the fullest extent permitted by law, Mow and More NJ shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services.</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Contact Information</h3>
+                        <p>For questions about these Terms of Service, please contact us at <a href="mailto:steven@mowandmore.co">steven@mowandmore.co</a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('mainForm').addEventListener('submit', function(e) {
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Before/After Slider functionality
+        document.querySelectorAll('.before-after-container').forEach(container => {
+            let isDragging = false;
+
+            function updateSlider(e, container) {
+                const rect = container.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                
+                const afterImage = container.querySelector('.after-image');
+                const sliderLine = container.querySelector('.slider-line');
+                const sliderButton = container.querySelector('.slider-button');
+                
+                afterImage.style.clipPath = `inset(0 0 0 ${percent}%)`;
+                sliderLine.style.left = `${percent}%`;
+                sliderButton.style.left = `${percent}%`;
+            }
+
+            container.addEventListener('mousedown', () => isDragging = true);
+            container.addEventListener('touchstart', () => isDragging = true);
+            
+            document.addEventListener('mouseup', () => isDragging = false);
+            document.addEventListener('touchend', () => isDragging = false);
+            
+            container.addEventListener('mousemove', (e) => {
+                if (isDragging) updateSlider(e, container);
+            });
+            
+            container.addEventListener('touchmove', (e) => {
+                if (isDragging) updateSlider(e, container);
+            });
+            
+            container.addEventListener('click', (e) => updateSlider(e, container));
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            this.classList.add('hidden');
-            document.getElementById('successMsg').classList.remove('hidden');
+            this.style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
     </script>
 </body>
