@@ -693,6 +693,95 @@
             background-color: var(--sand);
         }
         
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-content h2 {
+            font-size: 48px;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--forest);
+            margin-bottom: 16px;
+        }
+        
+        .contact-content p {
+            font-size: 18px;
+            color: var(--sage);
+            margin-bottom: 64px;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .contact-method {
+            width: 100%;
+        }
+        
+        .contact-method a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px 48px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-method:first-child a {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(74, 103, 65, 0.2);
+        }
+        
+        .contact-method:first-child a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .contact-method:first-child a:hover::before {
+            left: 100%;
+        }
+        
+        .contact-method:first-child a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 103, 65, 0.3);
+        }
+        
+        .contact-method:last-child a {
+            background: var(--white);
+            color: var(--forest);
+            border: 2px solid var(--sage);
+        }
+        
+        .contact-method:last-child a:hover {
+            background: var(--forest);
+            color: var(--white);
+            border-color: var(--forest);
+        }
+        
+        .contact-method i {
+            font-size: 20px;
+        }
+        
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -1121,6 +1210,19 @@
             .contact-divider {
                 display: none;
             }
+            
+            .contact-content h2 {
+                font-size: 36px;
+            }
+            
+            .contact-content p {
+                font-size: 16px;
+            }
+            
+            .contact-method a {
+                padding: 20px 32px;
+                font-size: 16px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1157,12 +1259,11 @@
             <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="tel:7329648794" class="nav-phone">
                     <i class="fas fa-phone-alt"></i> (732) 964-8794
                 </a></li>
-                <li><a href="#contact" class="btn btn-primary">Request Quote</a></li>
+                <li><a href="#contact" class="btn btn-primary">Get in Touch</a></li>
             </ul>
 
             <!-- Mobile Phone -->
@@ -1187,8 +1288,8 @@
                     Professional landscape maintenance and property care solutions designed for commercial excellence and residential distinction.
                 </p>
                 <div class="hero-buttons animate-fade-in-up delay-400">
-                    <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
-                    <a href="tel:7329648794" class="btn btn-secondary">(732) 964-8794</a>
+                    <a href="tel:7329648794" class="btn btn-primary">(732) 964-8794</a>
+                    <a href="/cdn-cgi/l/email-protection#34474051425174595b43555a50595b46511a575b" class="btn btn-secondary"><span class="__cf_email__" data-cfemail="e39097869586a38e8c94828d878e8c9186cd808c">[email&#160;protected]</span></a>
                 </div>
             </div>
         </div>
@@ -1242,20 +1343,20 @@
         <div class="container">
             <div class="grid grid-cols-4">
                 <div class="stat-item">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Years Experience</div>
+                    <div class="stat-number">&lt;15min</div>
+                    <div class="stat-label">Response Time</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number delay-100">200+</div>
+                    <div class="stat-number delay-100">100+</div>
                     <div class="stat-label">Properties Served</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number delay-200">100%</div>
-                    <div class="stat-label">Client Satisfaction</div>
+                    <div class="stat-number delay-200">10+</div>
+                    <div class="stat-label">Commercial Buildings</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number delay-300">24hr</div>
-                    <div class="stat-label">Response Time</div>
+                    <div class="stat-number delay-300">24/7</div>
+                    <div class="stat-label">Available Service</div>
                 </div>
             </div>
         </div>
@@ -1343,155 +1444,30 @@
         </div>
     </section>
 
-    <!-- Portfolio / Before & After Section -->
-    <section id="portfolio" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="decorative-line" style="margin: 0 auto 24px;"></div>
-                <h2 class="section-title">Our Work Speaks</h2>
-                <p class="section-subtitle">Transforming properties across New Jersey with precision and care</p>
-            </div>
-
-            <!-- Before/After Grid -->
-            <div class="grid grid-cols-2">
-                <!-- Before/After 1 -->
-                <div class="portfolio-item">
-                    <div class="before-after-container" data-slider="1">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
-                        <div class="after-image">
-                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
-                        </div>
-                        <div class="slider-line"></div>
-                        <div class="slider-button"></div>
-                        <div class="image-label before-label">BEFORE</div>
-                        <div class="image-label after-label">AFTER</div>
-                    </div>
-                    <div class="portfolio-caption">
-                        <h3>Residential Estate Revitalization</h3>
-                        <p>Complete lawn restoration with precision edging and mulch installation</p>
-                    </div>
-                </div>
-
-                <!-- Before/After 2 -->
-                <div class="portfolio-item">
-                    <div class="before-after-container" data-slider="2">
-                        <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
-                        <div class="after-image">
-                            <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
-                        </div>
-                        <div class="slider-line"></div>
-                        <div class="slider-button"></div>
-                        <div class="image-label before-label">BEFORE</div>
-                        <div class="image-label after-label">AFTER</div>
-                    </div>
-                    <div class="portfolio-caption">
-                        <h3>Commercial Property Upgrade</h3>
-                        <p>Full-service maintenance including landscape beds and seasonal plantings</p>
-                    </div>
-                </div>
-
-                <!-- Before/After 3 -->
-                <div class="portfolio-item">
-                    <div class="before-after-container" data-slider="3">
-                        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
-                        <div class="after-image">
-                            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
-                        </div>
-                        <div class="slider-line"></div>
-                        <div class="slider-button"></div>
-                        <div class="image-label before-label">BEFORE</div>
-                        <div class="image-label after-label">AFTER</div>
-                    </div>
-                    <div class="portfolio-caption">
-                        <h3>Multi-Unit Complex</h3>
-                        <p>Systematic turf management and landscape refresh for property managers</p>
-                    </div>
-                </div>
-
-                <!-- Before/After 4 -->
-                <div class="portfolio-item">
-                    <div class="before-after-container" data-slider="4">
-                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1000" alt="Before" class="before-image">
-                        <div class="after-image">
-                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1000&brightness=1.2&contrast=1.1" alt="After">
-                        </div>
-                        <div class="slider-line"></div>
-                        <div class="slider-button"></div>
-                        <div class="image-label before-label">BEFORE</div>
-                        <div class="image-label after-label">AFTER</div>
-                    </div>
-                    <div class="portfolio-caption">
-                        <h3>Seasonal Transformation</h3>
-                        <p>Spring cleanup with mulching, pruning, and landscape bed restoration</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <div class="section-header">
+            <div class="contact-content">
                 <div class="decorative-line" style="margin: 0 auto 24px;"></div>
-                <h2 class="section-title">Request a Consultation</h2>
-                <p class="section-subtitle" style="margin-bottom: 32px;">Let's discuss how we can elevate your property</p>
-                <div class="contact-info">
-                    <div class="contact-info-inner">
+                <h2>Let's Talk About Your Property</h2>
+                <p>Ready to elevate your landscape? Reach out today.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
                         <a href="tel:7329648794">
                             <i class="fas fa-phone-alt"></i>
-                            (732) 964-8794
+                            <span>Call (732) 964-8794</span>
                         </a>
-                        <span class="contact-divider">|</span>
-                        <a href="mailto:steven@mowandmore.co">
+                    </div>
+                    
+                    <div class="contact-method">
+                        <a href="mailto:steve@mowandmore.co">
                             <i class="fas fa-envelope"></i>
-                            steven@mowandmore.co
+                            <span>Email steve@mowandmore.co</span>
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <form id="contactForm" class="contact-form">
-                <div class="grid grid-cols-2">
-                    <div class="form-group">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" required class="form-input" placeholder="John Smith">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" required class="form-input" placeholder="john@company.com">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2">
-                    <div class="form-group">
-                        <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-input" placeholder="(555) 123-4567">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Property Type</label>
-                        <select class="form-select">
-                            <option>Commercial / Retail</option>
-                            <option>Property Management / HOA</option>
-                            <option>Residential Estate</option>
-                            <option>Multi-Unit Complex</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Project Details</label>
-                    <textarea rows="5" class="form-textarea" placeholder="Tell us about your property and maintenance requirements..."></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary form-submit">Submit Request</button>
-            </form>
-            
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle"></i>
-                <h3>Thank You!</h3>
-                <p>We'll contact you within 24 hours to discuss your project.</p>
             </div>
         </div>
     </section>
@@ -1525,9 +1501,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="mailto:steven@mowandmore.co">
+                            <a href="/cdn-cgi/l/email-protection#cbb8bfaebdae8ba6a4bcaaa5afa6a4b9aee5a8a4">
                                 <i class="fas fa-envelope"></i>
-                                steven@mowandmore.co
+                                <span class="__cf_email__" data-cfemail="403334253625002d2f37212e242d2f32256e232f">[email&#160;protected]</span>
                             </a>
                         </li>
                         <li style="display: flex; align-items: flex-start; gap: 12px; color: rgba(255, 255, 255, 0.8);">
@@ -1551,7 +1527,7 @@
             </div>
 
             <div class="footer-bottom">
-                <div class="footer-copyright">© 2024 Mow and More NJ. All Rights Reserved.</div>
+                <div class="footer-copyright">© 2026 Mow and More NJ. All Rights Reserved.</div>
                 <div class="footer-legal">
                     <a onclick="openModal('privacyModal')">Privacy Policy</a>
                     <a onclick="openModal('termsModal')">Terms of Service</a>
@@ -1572,7 +1548,7 @@
                 <div class="decorative-line" style="margin-bottom: 32px;"></div>
                 
                 <div class="modal-body">
-                    <p class="modal-updated"><strong>Last Updated:</strong> February 2024</p>
+                    <p class="modal-updated"><strong>Last Updated:</strong> February 2026</p>
                     
                     <section>
                         <h3>Information We Collect</h3>
@@ -1603,7 +1579,7 @@
                     
                     <section>
                         <h3>Your Rights</h3>
-                        <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights or if you have questions about our privacy practices, please contact us at <a href="mailto:steven@mowandmore.co">steven@mowandmore.co</a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
+                        <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights or if you have questions about our privacy practices, please contact us at <a href="/cdn-cgi/l/email-protection#4b383f2e3d2e0b26243c2a252f2624392e652824"><span class="__cf_email__" data-cfemail="cab9beafbcaf8aa7a5bdaba4aea7a5b8afe4a9a5">[email&#160;protected]</span></a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
                     </section>
                     
                     <section>
@@ -1632,7 +1608,7 @@
                 <div class="decorative-line" style="margin-bottom: 32px;"></div>
                 
                 <div class="modal-body">
-                    <p class="modal-updated"><strong>Last Updated:</strong> February 2024</p>
+                    <p class="modal-updated"><strong>Last Updated:</strong> February 2026</p>
                     
                     <section>
                         <h3>Agreement to Terms</h3>
@@ -1662,13 +1638,7 @@
                     </section>
                     
                     <section>
-                        <h3>Payment Terms</h3>
-                        <p>Payment is due upon completion of services unless otherwise specified in writing. We accept various payment methods including check, credit card, and electronic transfer. Late payments may incur additional fees as specified in individual service agreements.</p>
-                    </section>
-                    
-                    <section>
-                        <h3>Cancellation Policy</h3>
-                        <p>Either party may terminate ongoing service agreements with 30 days written notice. Early termination fees may apply for seasonal contracts. One-time services must be cancelled at least 24 hours before the scheduled service date to avoid cancellation fees.</p>
+             ith 30 days written notice. Early termination fees may apply for seasonal contracts. One-time services must be cancelled at least 24 hours before the scheduled service date to avoid cancellation fees.</p>
                     </section>
                     
                     <section>
@@ -1688,7 +1658,7 @@
                     
                     <section>
                         <h3>Contact Information</h3>
-                        <p>For questions about these Terms of Service, please contact us at <a href="mailto:steven@mowandmore.co">steven@mowandmore.co</a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
+                        <p>For questions about these Terms of Service, please contact us at <a href="mailto:steve@mowandmore.co">steve@mowandmore.co</a> or call <a href="tel:7329648794">(732) 964-8794</a>.</p>
                     </section>
                 </div>
             </div>
@@ -1759,16 +1729,6 @@
             });
             
             container.addEventListener('click', (e) => updateSlider(e, container));
-        });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
         // Smooth scroll for navigation links
