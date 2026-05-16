@@ -11,14 +11,23 @@
     <style>
         /* ===== CSS VARIABLES ===== */
         :root {
-            --forest: #1a3a1a;
-            --sage: #4a6741;
-            --mint: #7fa877;
-            --cream: #f8f7f3;
-            --sand: #e8e5dc;
-            --charcoal: #2d2d2d;
+            /* Cutting-edge modern palette */
+            --primary: #00ff88;
+            --primary-dark: #00cc6a;
+            --dark: #0a0a0a;
+            --dark-secondary: #1a1a1a;
+            --gray: #2a2a2a;
+            --light-gray: #e8e8e8;
             --white: #ffffff;
-            --black: #000000;
+            --accent: #ff3366;
+            
+            /* Legacy support */
+            --forest: #0a0a0a;
+            --sage: #00ff88;
+            --mint: #00cc6a;
+            --cream: #ffffff;
+            --sand: #f5f5f5;
+            --charcoal: #1a1a1a;
         }
         
         /* ===== RESET & BASE STYLES ===== */
@@ -34,8 +43,8 @@
         
         body { 
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--cream);
-            color: var(--charcoal);
+            background-color: var(--dark);
+            color: var(--white);
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -176,13 +185,14 @@
             right: 0;
             z-index: 50;
             backdrop-filter: blur(10px);
-            background: rgba(248, 247, 243, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
         }
         
         nav.scrolled {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
         }
         
         nav .container {
@@ -202,12 +212,13 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--sage), var(--mint));
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--dark);
             font-size: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
         .logo-text {
@@ -219,11 +230,11 @@
             font-size: 18px;
             font-weight: 700;
             letter-spacing: -0.02em;
-            color: var(--forest);
+            color: var(--white);
         }
         
         .logo-title span {
-            color: var(--sage);
+            color: var(--primary);
         }
         
         .logo-subtitle {
@@ -231,7 +242,7 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-weight: 600;
-            color: var(--sage);
+            color: var(--primary);
         }
         
         .nav-menu {
@@ -247,19 +258,19 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--charcoal);
+            color: var(--white);
             transition: color 0.3s ease;
         }
         
         .nav-menu a:hover {
-            color: var(--sage);
+            color: var(--primary);
         }
         
         .nav-phone {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--sage);
+            color: var(--primary);
             font-weight: 600;
         }
         
@@ -286,8 +297,9 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--sage), var(--mint));
-            color: var(--white);
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
         }
         
         .btn-primary::before {
@@ -297,7 +309,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.5s ease;
         }
         
@@ -307,23 +319,23 @@
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 103, 65, 0.3);
+            box-shadow: 0 8px 40px rgba(0, 255, 136, 0.5);
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: transparent;
             color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--primary);
         }
         
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--primary);
+            color: var(--dark);
         }
         
         /* ===== HERO SECTION ===== */
         .hero-section {
-            background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             position: relative;
             overflow: hidden;
             padding-top: 160px;
@@ -331,6 +343,7 @@
             min-height: 85vh;
             display: flex;
             align-items: center;
+            border-bottom: 2px solid var(--primary);
         }
         
         .hero-section::before {
@@ -343,7 +356,7 @@
             background-image: url('https://images.unsplash.com/photo-1558905819-17153c246a22?auto=format&fit=crop&q=80&w=2000');
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.08;
             mix-blend-mode: overlay;
         }
         
@@ -354,7 +367,7 @@
             left: 0;
             right: 0;
             height: 128px;
-            background: linear-gradient(to top, var(--cream), transparent);
+            background: linear-gradient(to top, var(--dark), transparent);
         }
         
         .hero-content {
@@ -374,8 +387,9 @@
         .hero-title span {
             display: block;
             font-weight: 600;
-            color: var(--mint);
+            color: var(--primary);
             margin-top: 8px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
         }
         
         .hero-subtitle {
@@ -406,7 +420,7 @@
         }
         
         .trust-card {
-            background: var(--white);
+            background: var(--gray);
             padding: 32px;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -435,7 +449,7 @@
         .trust-card h3 {
             font-size: 18px;
             font-weight: 700;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 8px;
         }
         
@@ -458,7 +472,7 @@
             font-size: 56px;
             font-weight: 700;
             font-family: 'Cormorant Garamond', serif;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 8px;
             animation: countUp 1s ease-out forwards;
             opacity: 0;
@@ -475,7 +489,7 @@
         /* ===== SERVICES SECTION ===== */
         .services-section {
             padding: 96px 0;
-            background-color: var(--sand);
+            background-color: var(--dark-secondary);
         }
         
         .section-header {
@@ -487,7 +501,7 @@
             font-size: 48px;
             font-weight: 300;
             font-family: 'Cormorant Garamond', serif;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 16px;
         }
         
@@ -499,7 +513,7 @@
         }
         
         .service-card {
-            background: var(--white);
+            background: var(--gray);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -528,7 +542,7 @@
         .service-card h3 {
             font-size: 24px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 16px;
         }
         
@@ -599,7 +613,7 @@
             left: 50%;
             width: 3px;
             height: 100%;
-            background: var(--white);
+            background: var(--gray);
             transform: translateX(-50%);
             z-index: 10;
             transition: left 0.3s ease;
@@ -612,7 +626,7 @@
             left: 50%;
             width: 50px;
             height: 50px;
-            background: var(--white);
+            background: var(--gray);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             z-index: 11;
@@ -659,7 +673,7 @@
             letter-spacing: 2px;
             z-index: 5;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            color: var(--forest);
+            color: var(--white);
         }
         
         .before-label {
@@ -671,14 +685,14 @@
         }
         
         .portfolio-caption {
-            background: var(--white);
+            background: var(--gray);
             padding: 24px;
         }
         
         .portfolio-caption h3 {
             font-size: 18px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 8px;
         }
         
@@ -690,7 +704,7 @@
         /* ===== CONTACT SECTION ===== */
         .contact-section {
             padding: 96px 0;
-            background-color: var(--sand);
+            background-color: var(--dark-secondary);
         }
         
         .contact-content {
@@ -703,7 +717,7 @@
             font-size: 48px;
             font-weight: 300;
             font-family: 'Cormorant Garamond', serif;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 16px;
         }
         
@@ -767,15 +781,15 @@
         }
         
         .contact-method:last-child a {
-            background: var(--white);
-            color: var(--forest);
+            background: var(--gray);
+            color: var(--white);
             border: 2px solid var(--sage);
         }
         
         .contact-method:last-child a:hover {
             background: var(--forest);
             color: var(--white);
-            border-color: var(--forest);
+            border-color: var(--white);
         }
         
         .contact-method i {
@@ -803,7 +817,7 @@
             align-items: center;
             gap: 12px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--white);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -821,7 +835,7 @@
         }
         
         .contact-form {
-            background: var(--white);
+            background: var(--gray);
             padding: 56px;
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
@@ -876,7 +890,7 @@
             display: none;
             margin-top: 32px;
             padding: 32px;
-            background: var(--white);
+            background: var(--gray);
             border-radius: 16px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -895,7 +909,7 @@
         .success-message h3 {
             font-size: 24px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 8px;
         }
         
@@ -907,8 +921,9 @@
         /* ===== FOOTER ===== */
         footer {
             padding: 64px 0;
-            background-color: var(--forest);
+            background-color: #0a0a0a;
             color: var(--white);
+            border-top: 2px solid var(--primary);
         }
         
         .footer-grid {
@@ -1034,7 +1049,7 @@
         
         .modal-content {
             position: relative;
-            background: var(--white);
+            background: var(--gray);
             border-radius: 16px;
             max-width: 1000px;
             width: 100%;
@@ -1059,7 +1074,7 @@
         }
         
         .modal-close:hover {
-            background-color: var(--sand);
+            background-color: var(--dark-secondary);
         }
         
         .modal-close i {
@@ -1071,7 +1086,7 @@
             font-size: 40px;
             font-weight: 300;
             font-family: 'Cormorant Garamond', serif;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 24px;
         }
         
@@ -1086,7 +1101,7 @@
         .modal-body h3 {
             font-size: 20px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--white);
             margin-bottom: 12px;
         }
         
@@ -1223,6 +1238,10 @@
                 padding: 20px 32px;
                 font-size: 16px;
             }
+            
+            .contact-content iframe {
+                height: 800px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1237,6 +1256,10 @@
             .btn {
                 padding: 14px 28px;
                 font-size: 13px;
+            }
+            
+            .contact-content iframe {
+                height: 750px;
             }
         }
     </style>
@@ -1488,15 +1511,19 @@
             <div class="contact-content">
                 <div class="decorative-line" style="margin: 0 auto 24px;"></div>
                 <h2>Let's Talk About Your Property</h2>
-                <p>Ready to elevate your landscape? Reach out today.</p>
+                <p>Ready to elevate your landscape? Fill out the form below or email us directly.</p>
                 
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <a href="mailto:dhruv@mowandmore.com">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email dhruv@mowandmore.com</span>
-                        </a>
-                    </div>
+                <!-- Google Form Embed -->
+                <div style="max-width: 700px; margin: 48px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdI0eKt3RcRZxeX0uDIfkooSjjS8t-cNmHyCTFAhgjGsD2HEQ/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="display: block;">Loading…</iframe>
+                </div>
+                
+                <div style="text-align: center; margin-top: 32px;">
+                    <p style="font-size: 16px; color: var(--sage); margin-bottom: 16px;">Or reach out directly</p>
+                    <a href="mailto:dhruv@mowandmore.com" style="display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px; background: linear-gradient(135deg, var(--sage), var(--mint)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
+                        <i class="fas fa-envelope"></i>
+                        <span>dhruv@mowandmore.com</span>
+                    </a>
                 </div>
             </div>
         </div>
